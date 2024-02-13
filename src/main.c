@@ -2,12 +2,9 @@
 #include <stdio.h>
 #include "State.h"
 
-int main() {
+int main(int argc, char *argv[]) {
     
-    
-    printf("Running\n");
-    
-    for (int i = 5; i < 6; i++) {
+    for (int i = 1; i < 2; i++) {
             
         Number next;
         
@@ -20,15 +17,15 @@ int main() {
             
             printf("Attempt with %dn + %d\n", n.coefficient, n.constant);
             
-            while (continue_action(n) != END && n.coefficient >= next.coefficient) {
+            while (continue_action(n) != END ) {
                 n = do_action(continue_action(n), n);
                 printf("%dn + %d\n", n.coefficient, n.constant);
             }
             
-            if (continue_action(n) != END /*&& next.constant % 4 != 1*/) {
-                printf("@Y %dn + %d\n", next.coefficient, next.constant);
-            } else {
+            if (continue_action(n) == END && n.coefficient >= next.coefficient) {
                 printf("@- %dn + %d\n", next.coefficient, next.constant);
+            } else {
+                printf("@Y %dn + %d\n", next.coefficient, next.constant);
             }
             
             next.constant += 2;
